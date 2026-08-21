@@ -1,1 +1,965 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Gudang Sekolah</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#1e293b;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:240px;
+    background:#123f6b;
+    color:white;
+    padding:25px 15px;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo-icon{
+    font-size:45px;
+}
+
+.logo h2{
+    font-size:18px;
+    margin-top:10px;
+}
+
+.logo p{
+    font-size:11px;
+    color:#cbd5e1;
+    margin-top:5px;
+}
+
+.menu-title{
+    font-size:10px;
+    color:#9fb7d0;
+    margin:20px 10px 8px;
+    text-transform:uppercase;
+}
+
+.menu button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#e2e8f0;
+    padding:13px;
+    text-align:left;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:5px;
+    font-size:13px;
+}
+
+.menu button:hover,
+.menu button.active{
+    background:white;
+    color:#2563eb;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:240px;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+.header{
+    background:white;
+    height:70px;
+    padding:0 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.header h1{
+    font-size:20px;
+}
+
+.header p{
+    color:#64748b;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.date{
+    font-size:12px;
+    color:#64748b;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.welcome{
+    background:linear-gradient(
+        110deg,
+        #2563eb,
+        #174ea6
+    );
+    color:white;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.welcome h2{
+    font-size:23px;
+    margin-bottom:7px;
+}
+
+.welcome p{
+    font-size:13px;
+    color:#dbeafe;
+}
+
+/* STAT */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+}
+
+.stat-icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.number{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.label{
+    font-size:11px;
+    color:#64748b;
+    margin-top:5px;
+}
+
+/* PANEL */
+
+.panel{
+    background:white;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.panel-title{
+    font-size:16px;
+    font-weight:bold;
+}
+
+.panel-description{
+    color:#64748b;
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f8fafc;
+    color:#64748b;
+    font-size:11px;
+    padding:12px;
+    text-align:left;
+}
+
+td{
+    padding:12px;
+    font-size:12px;
+    border-bottom:1px solid #edf0f4;
+}
+
+/* BUTTON */
+
+.btn{
+    border:0;
+    border-radius:7px;
+    padding:9px 13px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-danger{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-light{
+    background:#f1f5f9;
+    color:#475569;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px;
+    border:1px solid #dbe1e8;
+    border-radius:7px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#2563eb;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:200px;
+    }
+
+    .main{
+        margin-left:200px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        padding:15px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            📦
+        </div>
+
+        <h2>GUDANG SEKOLAH</h2>
+
+        <p>
+            Sistem Informasi Persediaan
+        </p>
+
+    </div>
+
+
+    <div class="menu-title">
+        Menu Utama
+    </div>
+
+
+    <div class="menu">
+
+        <button
+            class="active"
+            onclick="showPage('dashboard',this)">
+            📊 Dashboard
+        </button>
+
+        <button
+            onclick="showPage('barang',this)">
+            📦 Data Barang
+        </button>
+
+        <button
+            onclick="showPage('masuk',this)">
+            📥 Barang Masuk
+        </button>
+
+        <button
+            onclick="showPage('keluar',this)">
+            📤 Barang Keluar
+        </button>
+
+        <button
+            onclick="showPage('pencarian',this)">
+            🔎 Pencarian
+        </button>
+
+        <button
+            onclick="showPage('laporan',this)">
+            📋 Laporan
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div>
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+            <p>
+                Sistem Informasi Gudang Sekolah
+            </p>
+
+        </div>
+
+
+        <div class="date">
+
+            📅
+            <span id="tanggal"></span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+
+        <!-- DASHBOARD -->
+
+        <section
+            id="dashboard"
+            class="page active">
+
+
+            <div class="welcome">
+
+                <h2>
+                    Selamat Datang 👋
+                </h2>
+
+                <p>
+                    Kelola persediaan barang sekolah dengan mudah dan teratur.
+                </p>
+
+            </div>
+
+
+            <div class="stats">
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        📦
+                    </div>
+
+                    <div class="number">
+                        0
+                    </div>
+
+                    <div class="label">
+                        Jenis Barang
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        📊
+                    </div>
+
+                    <div class="number">
+                        0
+                    </div>
+
+                    <div class="label">
+                        Total Stok
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        📥
+                    </div>
+
+                    <div class="number">
+                        0
+                    </div>
+
+                    <div class="label">
+                        Barang Masuk
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        ⚠️
+                    </div>
+
+                    <div class="number">
+                        0
+                    </div>
+
+                    <div class="label">
+                        Stok Menipis
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-title">
+                            📦 Persediaan Barang
+                        </div>
+
+                        <div class="panel-description">
+                            Daftar barang di gudang sekolah
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="showPage('barang')">
+
+                        Lihat Data Barang
+
+                    </button>
+
+                </div>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Kode</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>ATK-001</td>
+
+                            <td>
+                                Contoh Pulpen
+                            </td>
+
+                            <td>
+                                ATK
+                            </td>
+
+                            <td>
+                                100
+                            </td>
+
+                            <td>
+                                <span
+                                    style="
+                                    color:#16a34a;
+                                    font-weight:bold;
+                                    ">
+                                    ● Aman
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- DATA BARANG -->
+
+        <section
+            id="barang"
+            class="page">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-title">
+                            📦 Data Barang
+                        </div>
+
+                        <div class="panel-description">
+                            Kelola daftar barang gudang
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="alert('Form tambah barang akan kita buat pada langkah berikutnya.')">
+
+                        + Tambah Barang
+
+                    </button>
+
+                </div>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori</th>
+                            <th>Satuan</th>
+                            <th>Stok</th>
+                            <th>Lokasi</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>1</td>
+                            <td>ATK-001</td>
+                            <td>Pulpen</td>
+                            <td>ATK</td>
+                            <td>pcs</td>
+                            <td>100</td>
+                            <td>Rak A1</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- BARANG MASUK -->
+
+        <section
+            id="masuk"
+            class="page">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-title">
+                            📥 Barang Masuk
+                        </div>
+
+                        <div class="panel-description">
+                            Catatan penerimaan barang
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-success"
+                        onclick="alert('Form barang masuk akan kita buat pada langkah berikutnya.')">
+
+                        + Barang Masuk
+
+                    </button>
+
+                </div>
+
+
+                <div style="
+                    text-align:center;
+                    padding:50px;
+                    color:#94a3b8;
+                    ">
+
+                    Belum ada transaksi barang masuk.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- BARANG KELUAR -->
+
+        <section
+            id="keluar"
+            class="page">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <div class="panel-title">
+                            📤 Barang Keluar
+                        </div>
+
+                        <div class="panel-description">
+                            Catatan pengeluaran barang
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="alert('Form barang keluar akan kita buat pada langkah berikutnya.')">
+
+                        + Barang Keluar
+
+                    </button>
+
+                </div>
+
+
+                <div style="
+                    text-align:center;
+                    padding:50px;
+                    color:#94a3b8;
+                    ">
+
+                    Belum ada transaksi barang keluar.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- PENCARIAN -->
+
+        <section
+            id="pencarian"
+            class="page">
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    🔎 Pencarian Barang
+                </div>
+
+                <br>
+
+                <input
+                    type="text"
+                    placeholder="Ketik nama barang atau kode..."
+                    style="
+                    width:100%;
+                    padding:12px;
+                    border:1px solid #dbe1e8;
+                    border-radius:7px;
+                    ">
+
+                <div style="
+                    text-align:center;
+                    padding:40px;
+                    color:#94a3b8;
+                    ">
+
+                    Masukkan kata pencarian.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- LAPORAN -->
+
+        <section
+            id="laporan"
+            class="page">
+
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    📋 Laporan Gudang
+                </div>
+
+                <br>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="window.print()">
+
+                    🖨 Cetak Laporan
+
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* TANGGAL */
+
+const tanggal =
+    new Date();
+
+document.getElementById(
+    "tanggal"
+).textContent =
+    tanggal.toLocaleDateString(
+        "id-ID",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+
+/* MENU */
+
+function showPage(
+    page,
+    button
+){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            p => p.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+
+    const titles = {
+
+        dashboard:"Dashboard",
+
+        barang:"Data Barang",
+
+        masuk:"Barang Masuk",
+
+        keluar:"Barang Keluar",
+
+        pencarian:"Pencarian",
+
+        laporan:"Laporan"
+
+    };
+
+
+    document
+        .getElementById("pageTitle")
+        .textContent =
+        titles[page];
+
+}
+
+</script>
+
+
+</body>
+</html>
