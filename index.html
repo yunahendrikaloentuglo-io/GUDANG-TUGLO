@@ -496,19 +496,14 @@ td{
 
 <div class="content">
 
-<!-- DASHBOARD -->
-
 <section id="dashboard" class="page active">
 
     <div class="welcome">
-
         <h2>Selamat Datang 👋</h2>
-
         <p>
             Kelola persediaan barang sekolah dengan mudah,
             cepat, dan teratur.
         </p>
-
     </div>
 
     <div class="stats">
@@ -567,8 +562,6 @@ td{
 </section>
 
 
-<!-- DATA BARANG -->
-
 <section id="barang" class="page">
 
     <div class="panel">
@@ -605,8 +598,6 @@ td{
 </section>
 
 
-<!-- BARANG MASUK -->
-
 <section id="masuk" class="page">
 
     <div class="panel">
@@ -638,8 +629,6 @@ td{
 </section>
 
 
-<!-- BARANG KELUAR -->
-
 <section id="keluar" class="page">
 
     <div class="panel">
@@ -670,8 +659,6 @@ td{
 </section>
 
 
-<!-- PENCARIAN -->
-
 <section id="pencarian" class="page">
 
     <div class="panel">
@@ -699,8 +686,6 @@ td{
 
 </section>
 
-
-<!-- LAPORAN -->
 
 <section id="laporan" class="page">
 
@@ -734,8 +719,6 @@ td{
 </div>
 </main>
 
-
-<!-- MODAL BARANG -->
 
 <div class="modal" id="barangModal">
 
@@ -838,18 +821,6 @@ td{
         <br>
 
         <button class="btn btn-success"
-           function openModal(id){
-
-    document.getElementById(id)
-        .classList.add("show");
-
-}
-           function closeModal(id){
-
-    document.getElementById(id)
-        .classList.remove("show");
-
-}
             onclick="simpanBarang()">
             💾 Simpan Barang
         </button>
@@ -863,8 +834,6 @@ td{
 
 </div>
 
-
-<!-- MODAL BARANG MASUK -->
 
 <div class="modal" id="masukModal">
 
@@ -916,7 +885,6 @@ td{
             onclick="simpanMasuk()">
             💾 Simpan Barang Masuk
         </button>
-       item.stok += jumlah; 
 
         <button class="btn btn-light"
             onclick="closeModal('masukModal')">
@@ -927,8 +895,6 @@ td{
 
 </div>
 
-
-<!-- MODAL BARANG KELUAR -->
 
 <div class="modal" id="keluarModal">
 
@@ -998,10 +964,6 @@ td{
 
 <script>
 
-/* =========================
-   DATA
-========================= */
-
 let barang = JSON.parse(
     localStorage.getItem("gudangBarang")
 ) || [];
@@ -1015,10 +977,6 @@ let transaksiKeluar = JSON.parse(
 ) || [];
 
 
-/* =========================
-   TANGGAL
-========================= */
-
 document.getElementById("tanggal").textContent =
     new Date().toLocaleDateString(
         "id-ID",
@@ -1031,10 +989,6 @@ document.getElementById("tanggal").textContent =
     );
 
 
-/* =========================
-   NAVIGASI
-========================= */
-
 function showPage(page,button){
 
     document.querySelectorAll(".page")
@@ -1042,8 +996,13 @@ function showPage(page,button){
             p.classList.remove("active");
         });
 
-    document.getElementById(page)
-        .classList.add("active");
+    const target = document.getElementById(page);
+
+    if(!target){
+        return;
+    }
+
+    target.classList.add("active");
 
     document.querySelectorAll(".menu button")
         .forEach(function(b){
@@ -1064,48 +1023,45 @@ function showPage(page,button){
     };
 
     document.getElementById("pageTitle")
-        .textContent = titles[page];
+        .textContent = titles[page] || "Dashboard";
 
     renderAll();
+
 }
 
 
 function showPageByName(page){
 
-    const buttons =
-        document.querySelectorAll(".menu button");
+    const button =
+        document.querySelector(
+            ".menu button[onclick*=\"'" + page + "'\"]"
+        );
 
-    buttons.forEach(function(button){
-
-        if(
-            button.getAttribute("onclick") &&
-            button.getAttribute("onclick")
-                .includes("'" + page + "'")
-        ){
-            showPage(page,button);
-        }
-
-    });
+    if(button){
+        showPage(page,button);
+    }
 
 }
 
 
-/* =========================
-   MODAL
-========================= */
-
 function openModal(id){
 
-    document.getElementById(id)
-        .classList.add("show");
+    const modal = document.getElementById(id);
+
+    if(modal){
+        modal.classList.add("show");
+    }
 
 }
 
 
 function closeModal(id){
 
-    document.getElementById(id)
-        .classList.remove("show");
+    const modal = document.getElementById(id);
+
+    if(modal){
+        modal.classList.remove("show");
+    }
 
 }
 
@@ -1122,12 +1078,9 @@ function openBarangModal(){
     document.getElementById("keteranganBarang").value="";
 
     openModal("barangModal");
+
 }
 
-
-/* =========================
-   SIMPAN BARANG
-========================= */
 
 function simpanBarang(){
 
@@ -1191,21 +1144,13 @@ function simpanBarang(){
     barang.push({
 
         id:Date.now(),
-
         kode:kode,
-
         nama:nama,
-
         kategori:kategori,
-
         satuan:satuan,
-
         stok:stok,
-
         minimum:minimum,
-
         lokasi:lokasi,
-
         keterangan:keterangan
 
     });
@@ -1221,10 +1166,6 @@ function simpanBarang(){
 
 }
 
-
-/* =========================
-   HAPUS BARANG
-========================= */
 
 function hapusBarang(id){
 
@@ -1263,10 +1204,6 @@ function hapusBarang(id){
 
 }
 
-
-/* =========================
-   BARANG MASUK
-========================= */
 
 function openMasukModal(){
 
@@ -1336,17 +1273,11 @@ function simpanMasuk(){
     transaksiMasuk.push({
 
         id:Date.now(),
-
         tanggal:tanggal,
-
         barangId:id,
-
         kode:item.kode,
-
         nama:item.nama,
-
         jumlah:jumlah,
-
         sumber:sumber
 
     });
@@ -1360,12 +1291,8 @@ function simpanMasuk(){
 
     renderAll();
 
+}
 
-
-
-/* =========================
-   BARANG KELUAR
-========================= */
 
 function openKeluarModal(){
 
@@ -1447,17 +1374,11 @@ function simpanKeluar(){
     transaksiKeluar.push({
 
         id:Date.now(),
-
         tanggal:tanggal,
-
         barangId:id,
-
         kode:item.kode,
-
         nama:item.nama,
-
         jumlah:jumlah,
-
         tujuan:tujuan
 
     });
@@ -1473,10 +1394,6 @@ function simpanKeluar(){
 
 }
 
-
-/* =========================
-   PILIH BARANG
-========================= */
 
 function isiPilihanBarang(selectId){
 
@@ -1509,20 +1426,20 @@ function isiPilihanBarang(selectId){
 }
 
 
-/* =========================
-   RENDER DATA BARANG
-========================= */
-
 function renderBarang(){
 
     const container =
         document.getElementById("tabelBarang");
 
+    const searchInput =
+        document.getElementById("searchBarang");
+
+    if(!container || !searchInput){
+        return;
+    }
+
     const search =
-        (
-            document.getElementById("searchBarang")
-            .value || ""
-        ).toLowerCase();
+        (searchInput.value || "").toLowerCase();
 
 
     const data =
@@ -1572,33 +1489,21 @@ function renderBarang(){
 
         html += `
         <tr>
-
             <td>${index + 1}</td>
-
             <td><b>${escapeHtml(item.kode)}</b></td>
-
             <td>${escapeHtml(item.nama)}</td>
-
             <td>${escapeHtml(item.kategori)}</td>
-
             <td>${escapeHtml(item.satuan)}</td>
-
             <td><b>${item.stok}</b></td>
-
             <td>${escapeHtml(item.lokasi)}</td>
-
             <td>${statusStok(item)}</td>
-
             <td>
-
                 <button
                     class="btn btn-danger"
                     onclick="hapusBarang(${item.id})">
                     Hapus
                 </button>
-
             </td>
-
         </tr>
         `;
 
@@ -1615,10 +1520,6 @@ function renderBarang(){
 
 }
 
-
-/* =========================
-   STATUS STOK
-========================= */
 
 function statusStok(item){
 
@@ -1638,10 +1539,6 @@ function statusStok(item){
 
 }
 
-
-/* =========================
-   RENDER DASHBOARD
-========================= */
 
 function renderDashboard(){
 
@@ -1712,17 +1609,11 @@ function renderDashboard(){
 
         html += `
         <tr>
-
             <td>${escapeHtml(item.kode)}</td>
-
             <td>${escapeHtml(item.nama)}</td>
-
             <td>${escapeHtml(item.kategori)}</td>
-
             <td>${item.stok} ${escapeHtml(item.satuan)}</td>
-
             <td>${statusStok(item)}</td>
-
         </tr>
         `;
 
@@ -1740,14 +1631,14 @@ function renderDashboard(){
 }
 
 
-/* =========================
-   TABEL MASUK
-========================= */
-
 function renderMasuk(){
 
     const container =
         document.getElementById("tabelMasuk");
+
+    if(!container){
+        return;
+    }
 
 
     if(transaksiMasuk.length === 0){
@@ -1806,14 +1697,14 @@ function renderMasuk(){
 }
 
 
-/* =========================
-   TABEL KELUAR
-========================= */
-
 function renderKeluar(){
 
     const container =
         document.getElementById("tabelKeluar");
+
+    if(!container){
+        return;
+    }
 
 
     if(transaksiKeluar.length === 0){
@@ -1872,10 +1763,6 @@ function renderKeluar(){
 }
 
 
-/* =========================
-   PENCARIAN
-========================= */
-
 function renderPencarian(){
 
     const container =
@@ -1883,6 +1770,10 @@ function renderPencarian(){
 
     const input =
         document.getElementById("searchGlobal");
+
+    if(!container || !input){
+        return;
+    }
 
     const search =
         (input.value || "").toLowerCase().trim();
@@ -1966,14 +1857,14 @@ function renderPencarian(){
 }
 
 
-/* =========================
-   LAPORAN
-========================= */
-
 function renderLaporan(){
 
     const container =
         document.getElementById("tabelLaporan");
+
+    if(!container){
+        return;
+    }
 
 
     if(barang.length === 0){
@@ -2036,10 +1927,6 @@ function renderLaporan(){
 }
 
 
-/* =========================
-   SIMPAN DATA
-========================= */
-
 function saveData(){
 
     localStorage.setItem(
@@ -2060,30 +1947,17 @@ function saveData(){
 }
 
 
-/* =========================
-   RENDER SEMUA
-========================= */
-
 function renderAll(){
 
     renderDashboard();
-
     renderBarang();
-
     renderMasuk();
-
     renderKeluar();
-
     renderPencarian();
-
     renderLaporan();
 
 }
 
-
-/* =========================
-   TOAST
-========================= */
 
 function toast(message){
 
@@ -2102,10 +1976,6 @@ function toast(message){
 
 }
 
-
-/* =========================
-   FORMAT TANGGAL
-========================= */
 
 function formatTanggal(tanggal){
 
@@ -2127,10 +1997,6 @@ function formatTanggal(tanggal){
 }
 
 
-/* =========================
-   KEAMANAN TEKS
-========================= */
-
 function escapeHtml(text){
 
     return String(text)
@@ -2142,10 +2008,6 @@ function escapeHtml(text){
 
 }
 
-
-/* =========================
-   MULAI APLIKASI
-========================= */
 
 renderAll();
 
