@@ -7,7 +7,6 @@
 <title>Gudang Sekolah</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -15,36 +14,39 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f7fb;
     color:#1e293b;
 }
 
-/* SIDEBAR */
+button,input,select{
+    font-family:inherit;
+}
 
 .sidebar{
     position:fixed;
     left:0;
     top:0;
     bottom:0;
-    width:240px;
-    background:#123f6b;
+    width:245px;
+    background:linear-gradient(180deg,#123f6b,#0f3152);
     color:white;
-    padding:25px 15px;
+    padding:24px 15px;
+    overflow-y:auto;
 }
 
 .logo{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
 .logo-icon{
-    font-size:45px;
+    font-size:42px;
 }
 
 .logo h2{
     font-size:18px;
-    margin-top:10px;
+    margin-top:8px;
 }
 
 .logo p{
@@ -56,7 +58,7 @@ body{
 .menu-title{
     font-size:10px;
     color:#9fb7d0;
-    margin:20px 10px 8px;
+    margin:18px 10px 8px;
     text-transform:uppercase;
 }
 
@@ -65,7 +67,7 @@ body{
     border:0;
     background:transparent;
     color:#e2e8f0;
-    padding:13px;
+    padding:12px;
     text-align:left;
     border-radius:8px;
     cursor:pointer;
@@ -79,19 +81,15 @@ body{
     color:#2563eb;
 }
 
-/* MAIN */
-
 .main{
-    margin-left:240px;
+    margin-left:245px;
     min-height:100vh;
 }
 
-/* HEADER */
-
 .header{
     background:white;
-    height:70px;
-    padding:0 30px;
+    min-height:70px;
+    padding:15px 30px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -113,8 +111,6 @@ body{
     color:#64748b;
 }
 
-/* CONTENT */
-
 .content{
     padding:30px;
 }
@@ -128,11 +124,7 @@ body{
 }
 
 .welcome{
-    background:linear-gradient(
-        110deg,
-        #2563eb,
-        #174ea6
-    );
+    background:linear-gradient(110deg,#2563eb,#174ea6);
     color:white;
     border-radius:16px;
     padding:25px;
@@ -148,8 +140,6 @@ body{
     font-size:13px;
     color:#dbeafe;
 }
-
-/* STAT */
 
 .stats{
     display:grid;
@@ -181,8 +171,6 @@ body{
     margin-top:5px;
 }
 
-/* PANEL */
-
 .panel{
     background:white;
     border-radius:12px;
@@ -195,6 +183,7 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:15px;
     margin-bottom:18px;
 }
 
@@ -208,8 +197,6 @@ body{
     font-size:11px;
     margin-top:4px;
 }
-
-/* TABLE */
 
 table{
     width:100%;
@@ -225,12 +212,10 @@ th{
 }
 
 td{
-    padding:12px;
+    padding:11px 12px;
     font-size:12px;
     border-bottom:1px solid #edf0f4;
 }
-
-/* BUTTON */
 
 .btn{
     border:0;
@@ -256,12 +241,21 @@ td{
     color:white;
 }
 
+.btn-warning{
+    background:#f59e0b;
+    color:white;
+}
+
 .btn-light{
     background:#f1f5f9;
     color:#475569;
 }
 
-/* FORM */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
 
 .form-group{
     margin-bottom:15px;
@@ -281,6 +275,7 @@ td{
     border:1px solid #dbe1e8;
     border-radius:7px;
     outline:none;
+    background:white;
 }
 
 .form-group input:focus,
@@ -288,16 +283,112 @@ td{
     border-color:#2563eb;
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+.actions{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
 }
 
-/* RESPONSIVE */
+.badge{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
 
-@media(max-width:900px){
+.badge-safe{
+    background:#dcfce7;
+    color:#166534;
+}
 
+.badge-low{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.badge-empty{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.search-box{
+    width:100%;
+    padding:12px;
+    border:1px solid #dbe1e8;
+    border-radius:8px;
+    outline:none;
+    margin-bottom:15px;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:600px;
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#f1f5f9;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#16a34a;
+    color:white;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:12px;
+    display:none;
+    z-index:2000;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.toast.show{
+    display:block;
+}
+
+@media(max-width:950px){
     .sidebar{
         width:200px;
     }
@@ -309,11 +400,9 @@ td{
     .stats{
         grid-template-columns:1fr 1fr;
     }
-
 }
 
-@media(max-width:600px){
-
+@media(max-width:650px){
     .sidebar{
         position:relative;
         width:100%;
@@ -338,71 +427,51 @@ td{
 
     .content{
         padding:15px;
+        overflow-x:auto;
     }
 
+    .panel{
+        min-width:650px;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
-
-
-<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
     <div class="logo">
-
-        <div class="logo-icon">
-            📦
-        </div>
-
+        <div class="logo-icon">📦</div>
         <h2>GUDANG SEKOLAH</h2>
-
-        <p>
-            Sistem Informasi Persediaan
-        </p>
-
+        <p>Sistem Informasi Persediaan</p>
     </div>
 
-
-    <div class="menu-title">
-        Menu Utama
-    </div>
-
+    <div class="menu-title">Menu Utama</div>
 
     <div class="menu">
 
-        <button
-            class="active"
-            onclick="showPage('dashboard',this)">
+        <button class="active" onclick="showPage('dashboard',this)">
             📊 Dashboard
         </button>
 
-        <button
-            onclick="showPage('barang',this)">
+        <button onclick="showPage('barang',this)">
             📦 Data Barang
         </button>
 
-        <button
-            onclick="showPage('masuk',this)">
+        <button onclick="showPage('masuk',this)">
             📥 Barang Masuk
         </button>
 
-        <button
-            onclick="showPage('keluar',this)">
+        <button onclick="showPage('keluar',this)">
             📤 Barang Keluar
         </button>
 
-        <button
-            onclick="showPage('pencarian',this)">
+        <button onclick="showPage('pencarian',this)">
             🔎 Pencarian
         </button>
 
-        <button
-            onclick="showPage('laporan',this)">
+        <button onclick="showPage('laporan',this)">
             📋 Laporan
         </button>
 
@@ -410,623 +479,535 @@ td{
 
 </aside>
 
-
-<!-- MAIN -->
-
 <main class="main">
 
+<header class="header">
 
-    <!-- HEADER -->
+    <div>
+        <h1 id="pageTitle">Dashboard</h1>
+        <p>Sistem Informasi Gudang Sekolah</p>
+    </div>
 
-    <header class="header">
+    <div class="date">
+        📅 <span id="tanggal"></span>
+    </div>
 
-        <div>
+</header>
 
-            <h1 id="pageTitle">
-                Dashboard
-            </h1>
+<div class="content">
 
-            <p>
-                Sistem Informasi Gudang Sekolah
-            </p>
+<!-- DASHBOARD -->
 
+<section id="dashboard" class="page active">
+
+    <div class="welcome">
+
+        <h2>Selamat Datang 👋</h2>
+
+        <p>
+            Kelola persediaan barang sekolah dengan mudah,
+            cepat, dan teratur.
+        </p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="card">
+            <div class="stat-icon">📦</div>
+            <div class="number" id="statJenis">0</div>
+            <div class="label">Jenis Barang</div>
         </div>
 
-
-        <div class="date">
-
-            📅
-            <span id="tanggal"></span>
-
+        <div class="card">
+            <div class="stat-icon">📊</div>
+            <div class="number" id="statStok">0</div>
+            <div class="label">Total Stok</div>
         </div>
 
-    </header>
-
-
-    <!-- CONTENT -->
-
-    <div class="content">
-
-
-        <!-- DASHBOARD -->
-
-        <section
-            id="dashboard"
-            class="page active">
-
-
-            <div class="welcome">
-
-                <h2>
-                    Selamat Datang 👋
-                </h2>
-
-                <p>
-                    Kelola persediaan barang sekolah dengan mudah dan teratur.
-                </p>
-
-            </div>
-
-
-            <div class="stats">
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        📦
-                    </div>
-
-                    <div class="number">
-                        0
-                    </div>
-
-                    <div class="label">
-                        Jenis Barang
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        📊
-                    </div>
-
-                    <div class="number">
-                        0
-                    </div>
-
-                    <div class="label">
-                        Total Stok
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        📥
-                    </div>
-
-                    <div class="number">
-                        0
-                    </div>
-
-                    <div class="label">
-                        Barang Masuk
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        ⚠️
-                    </div>
-
-                    <div class="number">
-                        0
-                    </div>
-
-                    <div class="label">
-                        Stok Menipis
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <div class="panel-title">
-                            📦 Persediaan Barang
-                        </div>
-
-                        <div class="panel-description">
-                            Daftar barang di gudang sekolah
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="showPage('barang')">
-
-                        Lihat Data Barang
-
-                    </button>
-
-                </div>
-
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Kode</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Stok</th>
-                            <th>Status</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>ATK-001</td>
-
-                            <td>
-                                Contoh Pulpen
-                            </td>
-
-                            <td>
-                                ATK
-                            </td>
-
-                            <td>
-                                100
-                            </td>
-
-                            <td>
-                                <span
-                                    style="
-                                    color:#16a34a;
-                                    font-weight:bold;
-                                    ">
-                                    ● Aman
-                                </span>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- DATA BARANG -->
-
-        <section
-            id="barang"
-            class="page">
-
-
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <div class="panel-title">
-                            📦 Data Barang
-                        </div>
-
-                        <div class="panel-description">
-                            Kelola daftar barang gudang
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="tampilkanFormBarang()">
-
-                        + Tambah Barang
-
-                    </button>
-
-                </div>
-
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>No</th>
-                            <th>Kode</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Satuan</th>
-                            <th>Stok</th>
-                            <th>Lokasi</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>1</td>
-                            <td>ATK-001</td>
-                            <td>Pulpen</td>
-                            <td>ATK</td>
-                            <td>pcs</td>
-                            <td>100</td>
-                            <td>Rak A1</td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- BARANG MASUK -->
-
-        <section
-            id="masuk"
-            class="page">
-
-<div
-    id="formBarang"
-    class="panel"
-    style="display:none;">
-
-    <div class="panel-header">
-
-        <div>
-            <div class="panel-title">
-                ➕ Tambah Barang Baru
-            </div>
-
-            <div class="panel-description">
-                Masukkan data barang yang akan disimpan
-            </div>
+        <div class="card">
+            <div class="stat-icon">📥</div>
+            <div class="number" id="statMasuk">0</div>
+            <div class="label">Total Barang Masuk</div>
+        </div>
+
+        <div class="card">
+            <div class="stat-icon">⚠️</div>
+            <div class="number" id="statMenipis">0</div>
+            <div class="label">Stok Menipis</div>
         </div>
 
     </div>
 
+    <div class="panel">
 
-    <div class="form-grid">
+        <div class="panel-header">
 
-        <div class="form-group">
-
-            <label>Kode Barang</label>
-
-            <input
-                type="text"
-                id="kodeBarang"
-                placeholder="Contoh: ATK-001">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Nama Barang</label>
-
-            <input
-                type="text"
-                id="namaBarang"
-                placeholder="Contoh: Pulpen">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Kategori</label>
-
-            <select id="kategoriBarang">
-
-                <option value="">
-                    Pilih kategori
-                </option>
-
-                <option>ATK</option>
-                <option>Kebersihan</option>
-                <option>Elektronik</option>
-                <option>Perlengkapan Kelas</option>
-                <option>Lainnya</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Satuan</label>
-
-            <select id="satuanBarang">
-
-                <option value="">
-                    Pilih satuan
-                </option>
-
-                <option>pcs</option>
-                <option>buah</option>
-                <option>unit</option>
-                <option>box</option>
-                <option>rim</option>
-                <option>paket</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Stok Awal</label>
-
-            <input
-                type="number"
-                id="stokBarang"
-                min="0"
-                placeholder="Contoh: 100">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Lokasi Penyimpanan</label>
-
-            <input
-                type="text"
-                id="lokasiBarang"
-                placeholder="Contoh: Rak A1">
-
-        </div>
-
-    </div>
-
-
-    <br>
-
-
-    <button
-        class="btn btn-success"
-  onclick="simpanBarang()"{
-
-        💾 Simpan Barang
-
-    </button>
-
-
-    <button
-        class="btn btn-light"
-        onclick="tutupFormBarang()">
-
-        Batal
-
-    </button>
-
-</div>
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <div class="panel-title">
-                            📥 Barang Masuk
-                        </div>
-
-                        <div class="panel-description">
-                            Catatan penerimaan barang
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn btn-success"
-                        onclick="alert('Form barang masuk akan kita buat pada langkah berikutnya.')">
-
-                        + Barang Masuk
-
-                    </button>
-
-                </div>
-
-
-                <div style="
-                    text-align:center;
-                    padding:50px;
-                    color:#94a3b8;
-                    ">
-
-                    Belum ada transaksi barang masuk.
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- BARANG KELUAR -->
-
-        <section
-            id="keluar"
-            class="page">
-
-
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <div class="panel-title">
-                            📤 Barang Keluar
-                        </div>
-
-                        <div class="panel-description">
-                            Catatan pengeluaran barang
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn btn-danger"
-                        onclick="alert('Form barang keluar akan kita buat pada langkah berikutnya.')">
-
-                        + Barang Keluar
-
-                    </button>
-
-                </div>
-
-
-                <div style="
-                    text-align:center;
-                    padding:50px;
-                    color:#94a3b8;
-                    ">
-
-                    Belum ada transaksi barang keluar.
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- PENCARIAN -->
-
-        <section
-            id="pencarian"
-            class="page">
-
-
-            <div class="panel">
-
+            <div>
                 <div class="panel-title">
-                    🔎 Pencarian Barang
+                    📦 Persediaan Barang
                 </div>
 
-                <br>
-
-                <input
-                    type="text"
-                    placeholder="Ketik nama barang atau kode..."
-                    style="
-                    width:100%;
-                    padding:12px;
-                    border:1px solid #dbe1e8;
-                    border-radius:7px;
-                    ">
-
-                <div style="
-                    text-align:center;
-                    padding:40px;
-                    color:#94a3b8;
-                    ">
-
-                    Masukkan kata pencarian.
-
+                <div class="panel-description">
+                    Ringkasan stok barang sekolah
                 </div>
-
             </div>
 
+            <button class="btn btn-primary"
+                onclick="showPageByName('barang')">
+                Lihat Data Barang
+            </button>
 
-        </section>
+        </div>
+
+        <div id="dashboardTable"></div>
+
+    </div>
+
+</section>
 
 
-        <!-- LAPORAN -->
+<!-- DATA BARANG -->
 
-        <section
-            id="laporan"
-            class="page">
+<section id="barang" class="page">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <div class="panel-title">
+                    📦 Data Barang
+                </div>
+
+                <div class="panel-description">
+                    Kelola seluruh data barang gudang sekolah
+                </div>
+            </div>
+
+            <button class="btn btn-primary"
+                onclick="openBarangModal()">
+                + Tambah Barang
+            </button>
+
+        </div>
+
+        <input
+            class="search-box"
+            id="searchBarang"
+            placeholder="🔎 Cari kode, nama, kategori, atau lokasi..."
+            oninput="renderBarang()">
+
+        <div id="tabelBarang"></div>
+
+    </div>
+
+</section>
 
 
-            <div class="panel">
+<!-- BARANG MASUK -->
 
+<section id="masuk" class="page">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <div class="panel-title">
+                    📥 Barang Masuk
+                </div>
+
+                <div class="panel-description">
+                    Mencatat penerimaan barang dari pembelian,
+                    donasi, atau sumber lainnya.
+                </div>
+            </div>
+
+            <button class="btn btn-success"
+                onclick="openMasukModal()">
+                + Barang Masuk
+            </button>
+
+        </div>
+
+        <div id="tabelMasuk"></div>
+
+    </div>
+
+</section>
+
+
+<!-- BARANG KELUAR -->
+
+<section id="keluar" class="page">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <div class="panel-title">
+                    📤 Barang Keluar
+                </div>
+
+                <div class="panel-description">
+                    Mencatat barang yang digunakan atau dikeluarkan.
+                </div>
+            </div>
+
+            <button class="btn btn-danger"
+                onclick="openKeluarModal()">
+                + Barang Keluar
+            </button>
+
+        </div>
+
+        <div id="tabelKeluar"></div>
+
+    </div>
+
+</section>
+
+
+<!-- PENCARIAN -->
+
+<section id="pencarian" class="page">
+
+    <div class="panel">
+
+        <div class="panel-title">
+            🔎 Pencarian Barang
+        </div>
+
+        <div class="panel-description">
+            Cari barang berdasarkan kode, nama, kategori,
+            atau lokasi penyimpanan.
+        </div>
+
+        <br>
+
+        <input
+            class="search-box"
+            id="searchGlobal"
+            placeholder="Ketik pencarian..."
+            oninput="renderPencarian()">
+
+        <div id="hasilPencarian"></div>
+
+    </div>
+
+</section>
+
+
+<!-- LAPORAN -->
+
+<section id="laporan" class="page">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
                 <div class="panel-title">
                     📋 Laporan Gudang
                 </div>
 
-                <br>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="window.print()">
-
-                    🖨 Cetak Laporan
-
-                </button>
-
+                <div class="panel-description">
+                    Ringkasan persediaan barang sekolah.
+                </div>
             </div>
 
+            <button class="btn btn-primary"
+                onclick="window.print()">
+                🖨 Cetak
+            </button>
 
-        </section>
+        </div>
 
+        <div id="tabelLaporan"></div>
 
     </div>
 
+</section>
+
+</div>
 </main>
+
+
+<!-- MODAL BARANG -->
+
+<div class="modal" id="barangModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="panel-title">
+                    📦 Tambah Barang
+                </div>
+
+                <div class="panel-description">
+                    Masukkan data barang baru.
+                </div>
+            </div>
+
+            <button class="close"
+                onclick="closeModal('barangModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Kode Barang</label>
+                <input id="kodeBarang"
+                    placeholder="Contoh: ATK-001">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Barang</label>
+                <input id="namaBarang"
+                    placeholder="Contoh: Pulpen">
+            </div>
+
+            <div class="form-group">
+                <label>Kategori</label>
+
+                <select id="kategoriBarang">
+                    <option value="">Pilih kategori</option>
+                    <option>ATK</option>
+                    <option>Kebersihan</option>
+                    <option>Elektronik</option>
+                    <option>Perlengkapan Kelas</option>
+                    <option>Olahraga</option>
+                    <option>Perpustakaan</option>
+                    <option>Lainnya</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Satuan</label>
+
+                <select id="satuanBarang">
+                    <option value="">Pilih satuan</option>
+                    <option>pcs</option>
+                    <option>buah</option>
+                    <option>unit</option>
+                    <option>box</option>
+                    <option>rim</option>
+                    <option>paket</option>
+                    <option>set</option>
+                    <option>lusin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Stok Awal</label>
+                <input type="number"
+                    id="stokBarang"
+                    min="0"
+                    value="0">
+            </div>
+
+            <div class="form-group">
+                <label>Stok Minimum</label>
+                <input type="number"
+                    id="minimumBarang"
+                    min="0"
+                    value="5">
+            </div>
+
+            <div class="form-group">
+                <label>Lokasi</label>
+                <input id="lokasiBarang"
+                    placeholder="Contoh: Rak A1">
+            </div>
+
+            <div class="form-group">
+                <label>Keterangan</label>
+                <input id="keteranganBarang"
+                    placeholder="Keterangan tambahan">
+            </div>
+
+        </div>
+
+        <br>
+
+        <button class="btn btn-success"
+            onclick="simpanBarang()">
+            💾 Simpan Barang
+        </button>
+
+        <button class="btn btn-light"
+            onclick="closeModal('barangModal')">
+            Batal
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL BARANG MASUK -->
+
+<div class="modal" id="masukModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="panel-title">
+                    📥 Barang Masuk
+                </div>
+            </div>
+
+            <button class="close"
+                onclick="closeModal('masukModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal</label>
+            <input type="date" id="tanggalMasuk">
+        </div>
+
+        <div class="form-group">
+            <label>Barang</label>
+
+            <select id="barangMasuk">
+                <option value="">Pilih barang</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input type="number"
+                id="jumlahMasuk"
+                min="1"
+                placeholder="Jumlah barang">
+        </div>
+
+        <div class="form-group">
+            <label>Sumber / Keterangan</label>
+            <input id="sumberMasuk"
+                placeholder="Contoh: Pembelian">
+        </div>
+
+        <button class="btn btn-success"
+            onclick="simpanMasuk()">
+            💾 Simpan Barang Masuk
+        </button>
+
+        <button class="btn btn-light"
+            onclick="closeModal('masukModal')">
+            Batal
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL BARANG KELUAR -->
+
+<div class="modal" id="keluarModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="panel-title">
+                    📤 Barang Keluar
+                </div>
+            </div>
+
+            <button class="close"
+                onclick="closeModal('keluarModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal</label>
+            <input type="date" id="tanggalKeluar">
+        </div>
+
+        <div class="form-group">
+            <label>Barang</label>
+
+            <select id="barangKeluar">
+                <option value="">Pilih barang</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input type="number"
+                id="jumlahKeluar"
+                min="1"
+                placeholder="Jumlah barang">
+        </div>
+
+        <div class="form-group">
+            <label>Penerima / Tujuan</label>
+            <input id="tujuanKeluar"
+                placeholder="Contoh: Ruang Kelas 6A">
+        </div>
+
+        <button class="btn btn-danger"
+            onclick="simpanKeluar()">
+            💾 Simpan Barang Keluar
+        </button>
+
+        <button class="btn btn-light"
+            onclick="closeModal('keluarModal')">
+            Batal
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+    Data berhasil disimpan.
+</div>
 
 
 <script>
 
-/* TANGGAL */
+/* =========================
+   DATA
+========================= */
 
-const tanggal =
-    new Date();
+let barang = JSON.parse(
+    localStorage.getItem("gudangBarang")
+) || [];
 
-document.getElementById(
-    "tanggal"
-).textContent =
-    tanggal.toLocaleDateString(
+let transaksiMasuk = JSON.parse(
+    localStorage.getItem("gudangMasuk")
+) || [];
+
+let transaksiKeluar = JSON.parse(
+    localStorage.getItem("gudangKeluar")
+) || [];
+
+
+/* =========================
+   TANGGAL
+========================= */
+
+document.getElementById("tanggal").textContent =
+    new Date().toLocaleDateString(
         "id-ID",
         {
             weekday:"long",
@@ -1037,205 +1018,1125 @@ document.getElementById(
     );
 
 
-/* MENU */
+/* =========================
+   NAVIGASI
+========================= */
 
-function showPage(
-    page,
-    button
-){
+function showPage(page,button){
 
-    document
-        .querySelectorAll(".page")
-        .forEach(
-            p => p.classList.remove("active")
-        );
+    document.querySelectorAll(".page")
+        .forEach(function(p){
+            p.classList.remove("active");
+        });
 
-
-    document
-        .getElementById(page)
+    document.getElementById(page)
         .classList.add("active");
 
-
-    document
-        .querySelectorAll(".menu button")
-        .forEach(
-            b => b.classList.remove("active")
-        );
-
+    document.querySelectorAll(".menu button")
+        .forEach(function(b){
+            b.classList.remove("active");
+        });
 
     if(button){
-
         button.classList.add("active");
-
     }
 
-
     const titles = {
-
         dashboard:"Dashboard",
-
         barang:"Data Barang",
-
         masuk:"Barang Masuk",
-
         keluar:"Barang Keluar",
-
         pencarian:"Pencarian",
-
         laporan:"Laporan"
-
     };
 
+    document.getElementById("pageTitle")
+        .textContent = titles[page];
 
-    document
-        .getElementById("pageTitle")
-        .textContent =
-        titles[page];
-
+    renderAll();
 }
 
-function tampilkanFormBarang(){
 
-    const form =
-        document.getElementById("formBarang");
+function showPageByName(page){
 
-    form.style.display = "block";
+    const buttons =
+        document.querySelectorAll(".menu button");
 
-    form.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    buttons.forEach(function(button){
+
+        if(
+            button.getAttribute("onclick") &&
+            button.getAttribute("onclick")
+                .includes("'" + page + "'")
+        ){
+            showPage(page,button);
+        }
+
     });
 
 }
 
 
-function tutupFormBarang(){
+/* =========================
+   MODAL
+========================= */
+
+function openModal(id){
+
+    document.getElementById(id)
+        .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+function openBarangModal(){
+
+    document.getElementById("kodeBarang").value="";
+    document.getElementById("namaBarang").value="";
+    document.getElementById("kategoriBarang").value="";
+    document.getElementById("satuanBarang").value="";
+    document.getElementById("stokBarang").value="0";
+    document.getElementById("minimumBarang").value="5";
+    document.getElementById("lokasiBarang").value="";
+    document.getElementById("keteranganBarang").value="";
+
+    openModal("barangModal");
+}
+
+
+/* =========================
+   SIMPAN BARANG
+========================= */
+
 function simpanBarang(){
 
     const kode =
-        document.getElementById("kodeBarang").value.trim();
+        document.getElementById("kodeBarang")
+        .value.trim();
 
     const nama =
-        document.getElementById("namaBarang").value.trim();
+        document.getElementById("namaBarang")
+        .value.trim();
 
     const kategori =
-        document.getElementById("kategoriBarang").value;
+        document.getElementById("kategoriBarang")
+        .value;
 
     const satuan =
-        document.getElementById("satuanBarang").value;
+        document.getElementById("satuanBarang")
+        .value;
 
     const stok =
-        document.getElementById("stokBarang").value;
+        Number(document.getElementById("stokBarang").value);
+
+    const minimum =
+        Number(document.getElementById("minimumBarang").value);
 
     const lokasi =
-        document.getElementById("lokasiBarang").value.trim();
+        document.getElementById("lokasiBarang")
+        .value.trim();
+
+    const keterangan =
+        document.getElementById("keteranganBarang")
+        .value.trim();
 
 
     if(
-        kode === "" ||
-        nama === "" ||
-        kategori === "" ||
-        satuan === "" ||
-        stok === "" ||
-        lokasi === ""
+        !kode ||
+        !nama ||
+        !kategori ||
+        !satuan ||
+        !lokasi
     ){
 
-        alert("Mohon lengkapi semua data barang.");
+        alert("Mohon lengkapi data barang.");
 
         return;
-
     }
 
 
-    const barang = {
+    if(
+        barang.some(function(item){
+            return item.kode.toLowerCase() === kode.toLowerCase();
+        })
+    ){
 
-        kode: kode,
-
-        nama: nama,
-
-        kategori: kategori,
-
-        satuan: satuan,
-
-        stok: Number(stok),
-
-        lokasi: lokasi
-
-    };
-
-
-    let daftarBarang =
-        JSON.parse(
-            localStorage.getItem("daftarBarang")
-        ) || [];
-
-
-    const sudahAda =
-        daftarBarang.some(
-            item => item.kode === kode
-        );
-
-
-    if(sudahAda){
-
-        alert(
-            "Kode barang tersebut sudah digunakan."
-        );
+        alert("Kode barang sudah digunakan.");
 
         return;
-
     }
 
 
-    daftarBarang.push(barang);
+    barang.push({
+
+        id:Date.now(),
+
+        kode:kode,
+
+        nama:nama,
+
+        kategori:kategori,
+
+        satuan:satuan,
+
+        stok:stok,
+
+        minimum:minimum,
+
+        lokasi:lokasi,
+
+        keterangan:keterangan
+
+    });
 
 
-    localStorage.setItem(
-        "daftarBarang",
-        JSON.stringify(daftarBarang)
-    );
+    saveData();
 
+    closeModal("barangModal");
 
-    alert(
-        "Barang berhasil disimpan! ✅"
-    );
+    toast("Barang berhasil ditambahkan.");
 
-
-    document.getElementById(
-        "kodeBarang"
-    ).value = "";
-
-    document.getElementById(
-        "namaBarang"
-    ).value = "";
-
-    document.getElementById(
-        "kategoriBarang"
-    ).value = "";
-
-    document.getElementById(
-        "satuanBarang"
-    ).value = "";
-
-    document.getElementById(
-        "stokBarang"
-    ).value = "";
-
-    document.getElementById(
-        "lokasiBarang"
-    ).value = "";
-
-
-    tutupFormBarang();
+    renderAll();
 
 }
-    const form =
-        document.getElementById("formBarang");
 
-    form.style.display = "none";
 
-}</script>
+/* =========================
+   HAPUS BARANG
+========================= */
 
+function hapusBarang(id){
+
+    const item =
+        barang.find(function(b){
+            return b.id === id;
+        });
+
+    if(!item){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Hapus barang " +
+            item.nama +
+            "?"
+        )
+    ){
+        return;
+    }
+
+
+    barang =
+        barang.filter(function(b){
+            return b.id !== id;
+        });
+
+
+    saveData();
+
+    toast("Barang berhasil dihapus.");
+
+    renderAll();
+
+}
+
+
+/* =========================
+   BARANG MASUK
+========================= */
+
+function openMasukModal(){
+
+    if(barang.length === 0){
+
+        alert(
+            "Silakan tambahkan data barang terlebih dahulu."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("tanggalMasuk").value =
+        new Date().toISOString().split("T")[0];
+
+    document.getElementById("jumlahMasuk").value="";
+    document.getElementById("sumberMasuk").value="";
+
+    isiPilihanBarang("barangMasuk");
+
+    openModal("masukModal");
+
+}
+
+
+function simpanMasuk(){
+
+    const tanggal =
+        document.getElementById("tanggalMasuk").value;
+
+    const id =
+        Number(document.getElementById("barangMasuk").value);
+
+    const jumlah =
+        Number(document.getElementById("jumlahMasuk").value);
+
+    const sumber =
+        document.getElementById("sumberMasuk").value.trim();
+
+
+    if(!tanggal || !id || jumlah <= 0){
+
+        alert("Mohon lengkapi data barang masuk.");
+
+        return;
+    }
+
+
+    const item =
+        barang.find(function(b){
+            return b.id === id;
+        });
+
+
+    if(!item){
+
+        alert("Barang tidak ditemukan.");
+
+        return;
+    }
+
+
+    item.stok += jumlah;
+
+
+    transaksiMasuk.push({
+
+        id:Date.now(),
+
+        tanggal:tanggal,
+
+        barangId:id,
+
+        kode:item.kode,
+
+        nama:item.nama,
+
+        jumlah:jumlah,
+
+        sumber:sumber
+
+    });
+
+
+    saveData();
+
+    closeModal("masukModal");
+
+    toast("Barang masuk berhasil dicatat.");
+
+    renderAll();
+
+}
+
+
+/* =========================
+   BARANG KELUAR
+========================= */
+
+function openKeluarModal(){
+
+    if(barang.length === 0){
+
+        alert(
+            "Silakan tambahkan data barang terlebih dahulu."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("tanggalKeluar").value =
+        new Date().toISOString().split("T")[0];
+
+    document.getElementById("jumlahKeluar").value="";
+    document.getElementById("tujuanKeluar").value="";
+
+    isiPilihanBarang("barangKeluar");
+
+    openModal("keluarModal");
+
+}
+
+
+function simpanKeluar(){
+
+    const tanggal =
+        document.getElementById("tanggalKeluar").value;
+
+    const id =
+        Number(document.getElementById("barangKeluar").value);
+
+    const jumlah =
+        Number(document.getElementById("jumlahKeluar").value);
+
+    const tujuan =
+        document.getElementById("tujuanKeluar").value.trim();
+
+
+    if(!tanggal || !id || jumlah <= 0){
+
+        alert("Mohon lengkapi data barang keluar.");
+
+        return;
+    }
+
+
+    const item =
+        barang.find(function(b){
+            return b.id === id;
+        });
+
+
+    if(!item){
+
+        alert("Barang tidak ditemukan.");
+
+        return;
+    }
+
+
+    if(jumlah > item.stok){
+
+        alert(
+            "Stok tidak mencukupi.\n\n" +
+            "Stok tersedia: " +
+            item.stok
+        );
+
+        return;
+    }
+
+
+    item.stok -= jumlah;
+
+
+    transaksiKeluar.push({
+
+        id:Date.now(),
+
+        tanggal:tanggal,
+
+        barangId:id,
+
+        kode:item.kode,
+
+        nama:item.nama,
+
+        jumlah:jumlah,
+
+        tujuan:tujuan
+
+    });
+
+
+    saveData();
+
+    closeModal("keluarModal");
+
+    toast("Barang keluar berhasil dicatat.");
+
+    renderAll();
+
+}
+
+
+/* =========================
+   PILIH BARANG
+========================= */
+
+function isiPilihanBarang(selectId){
+
+    const select =
+        document.getElementById(selectId);
+
+    select.innerHTML =
+        '<option value="">Pilih barang</option>';
+
+
+    barang.forEach(function(item){
+
+        const option =
+            document.createElement("option");
+
+        option.value = item.id;
+
+        option.textContent =
+            item.kode +
+            " - " +
+            item.nama +
+            " (Stok: " +
+            item.stok +
+            ")";
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================
+   RENDER DATA BARANG
+========================= */
+
+function renderBarang(){
+
+    const container =
+        document.getElementById("tabelBarang");
+
+    const search =
+        (
+            document.getElementById("searchBarang")
+            .value || ""
+        ).toLowerCase();
+
+
+    const data =
+        barang.filter(function(item){
+
+            return (
+                item.kode.toLowerCase().includes(search) ||
+                item.nama.toLowerCase().includes(search) ||
+                item.kategori.toLowerCase().includes(search) ||
+                item.lokasi.toLowerCase().includes(search)
+            );
+
+        });
+
+
+    if(data.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Belum ada data barang.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Kategori</th>
+        <th>Satuan</th>
+        <th>Stok</th>
+        <th>Lokasi</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    data.forEach(function(item,index){
+
+        html += `
+        <tr>
+
+            <td>${index + 1}</td>
+
+            <td><b>${escapeHtml(item.kode)}</b></td>
+
+            <td>${escapeHtml(item.nama)}</td>
+
+            <td>${escapeHtml(item.kategori)}</td>
+
+            <td>${escapeHtml(item.satuan)}</td>
+
+            <td><b>${item.stok}</b></td>
+
+            <td>${escapeHtml(item.lokasi)}</td>
+
+            <td>${statusStok(item)}</td>
+
+            <td>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="hapusBarang(${item.id})">
+                    Hapus
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   STATUS STOK
+========================= */
+
+function statusStok(item){
+
+    if(item.stok <= 0){
+
+        return '<span class="badge badge-empty">Habis</span>';
+
+    }
+
+    if(item.stok <= item.minimum){
+
+        return '<span class="badge badge-low">Menipis</span>';
+
+    }
+
+    return '<span class="badge badge-safe">Aman</span>';
+
+}
+
+
+/* =========================
+   RENDER DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+    const totalJenis =
+        barang.length;
+
+    const totalStok =
+        barang.reduce(function(total,item){
+            return total + Number(item.stok);
+        },0);
+
+    const totalMasuk =
+        transaksiMasuk.reduce(function(total,item){
+            return total + Number(item.jumlah);
+        },0);
+
+    const menipis =
+        barang.filter(function(item){
+            return item.stok <= item.minimum;
+        }).length;
+
+
+    document.getElementById("statJenis")
+        .textContent = totalJenis;
+
+    document.getElementById("statStok")
+        .textContent = totalStok;
+
+    document.getElementById("statMasuk")
+        .textContent = totalMasuk;
+
+    document.getElementById("statMenipis")
+        .textContent = menipis;
+
+
+    const container =
+        document.getElementById("dashboardTable");
+
+
+    if(barang.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Belum ada data barang. Silakan tambahkan barang.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Kategori</th>
+        <th>Stok</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    barang.slice(0,10)
+        .forEach(function(item){
+
+        html += `
+        <tr>
+
+            <td>${escapeHtml(item.kode)}</td>
+
+            <td>${escapeHtml(item.nama)}</td>
+
+            <td>${escapeHtml(item.kategori)}</td>
+
+            <td>${item.stok} ${escapeHtml(item.satuan)}</td>
+
+            <td>${statusStok(item)}</td>
+
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   TABEL MASUK
+========================= */
+
+function renderMasuk(){
+
+    const container =
+        document.getElementById("tabelMasuk");
+
+
+    if(transaksiMasuk.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Belum ada transaksi barang masuk.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Tanggal</th>
+        <th>Kode</th>
+        <th>Barang</th>
+        <th>Jumlah</th>
+        <th>Sumber</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    transaksiMasuk.slice()
+        .reverse()
+        .forEach(function(item,index){
+
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${formatTanggal(item.tanggal)}</td>
+            <td>${escapeHtml(item.kode)}</td>
+            <td>${escapeHtml(item.nama)}</td>
+            <td><b>+${item.jumlah}</b></td>
+            <td>${escapeHtml(item.sumber || "-")}</td>
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   TABEL KELUAR
+========================= */
+
+function renderKeluar(){
+
+    const container =
+        document.getElementById("tabelKeluar");
+
+
+    if(transaksiKeluar.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Belum ada transaksi barang keluar.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Tanggal</th>
+        <th>Kode</th>
+        <th>Barang</th>
+        <th>Jumlah</th>
+        <th>Tujuan</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    transaksiKeluar.slice()
+        .reverse()
+        .forEach(function(item,index){
+
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${formatTanggal(item.tanggal)}</td>
+            <td>${escapeHtml(item.kode)}</td>
+            <td>${escapeHtml(item.nama)}</td>
+            <td><b>-${item.jumlah}</b></td>
+            <td>${escapeHtml(item.tujuan || "-")}</td>
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   PENCARIAN
+========================= */
+
+function renderPencarian(){
+
+    const container =
+        document.getElementById("hasilPencarian");
+
+    const input =
+        document.getElementById("searchGlobal");
+
+    const search =
+        (input.value || "").toLowerCase().trim();
+
+
+    if(!search){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Ketik kata pencarian untuk mencari barang.' +
+            '</div>';
+
+        return;
+    }
+
+
+    const data =
+        barang.filter(function(item){
+
+            return (
+                item.kode.toLowerCase().includes(search) ||
+                item.nama.toLowerCase().includes(search) ||
+                item.kategori.toLowerCase().includes(search) ||
+                item.lokasi.toLowerCase().includes(search)
+            );
+
+        });
+
+
+    if(data.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Barang tidak ditemukan.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Kategori</th>
+        <th>Stok</th>
+        <th>Lokasi</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    data.forEach(function(item){
+
+        html += `
+        <tr>
+            <td>${escapeHtml(item.kode)}</td>
+            <td>${escapeHtml(item.nama)}</td>
+            <td>${escapeHtml(item.kategori)}</td>
+            <td>${item.stok} ${escapeHtml(item.satuan)}</td>
+            <td>${escapeHtml(item.lokasi)}</td>
+            <td>${statusStok(item)}</td>
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   LAPORAN
+========================= */
+
+function renderLaporan(){
+
+    const container =
+        document.getElementById("tabelLaporan");
+
+
+    if(barang.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">' +
+            'Belum ada data untuk laporan.' +
+            '</div>';
+
+        return;
+    }
+
+
+    let html = `
+    <table>
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Kategori</th>
+        <th>Satuan</th>
+        <th>Stok</th>
+        <th>Minimum</th>
+        <th>Lokasi</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+
+
+    barang.forEach(function(item,index){
+
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${escapeHtml(item.kode)}</td>
+            <td>${escapeHtml(item.nama)}</td>
+            <td>${escapeHtml(item.kategori)}</td>
+            <td>${escapeHtml(item.satuan)}</td>
+            <td>${item.stok}</td>
+            <td>${item.minimum}</td>
+            <td>${escapeHtml(item.lokasi)}</td>
+            <td>${statusStok(item)}</td>
+        </tr>
+        `;
+
+    });
+
+
+    html += `
+    </tbody>
+    </table>
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================
+   SIMPAN DATA
+========================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "gudangBarang",
+        JSON.stringify(barang)
+    );
+
+    localStorage.setItem(
+        "gudangMasuk",
+        JSON.stringify(transaksiMasuk)
+    );
+
+    localStorage.setItem(
+        "gudangKeluar",
+        JSON.stringify(transaksiKeluar)
+    ));
+
+}
+
+
+/* =========================
+   RENDER SEMUA
+========================= */
+
+function renderAll(){
+
+    renderDashboard();
+
+    renderBarang();
+
+    renderMasuk();
+
+    renderKeluar();
+
+    renderPencarian();
+
+    renderLaporan();
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(message){
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent = message;
+
+    el.classList.add("show");
+
+    setTimeout(function(){
+
+        el.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================
+   FORMAT TANGGAL
+========================= */
+
+function formatTanggal(tanggal){
+
+    if(!tanggal){
+        return "-";
+    }
+
+    return new Date(
+        tanggal + "T00:00:00"
+    ).toLocaleDateString(
+        "id-ID",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================
+   KEAMANAN TEKS
+========================= */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   MULAI APLIKASI
+========================= */
+
+renderAll();
+
+</script>
 
 </body>
 </html>
