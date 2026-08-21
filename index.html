@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -479,6 +480,7 @@ td{
 
 </aside>
 
+
 <main class="main">
 
 <header class="header">
@@ -494,16 +496,24 @@ td{
 
 </header>
 
+
 <div class="content">
+
+<!-- =========================
+     DASHBOARD
+========================= -->
 
 <section id="dashboard" class="page active">
 
     <div class="welcome">
+
         <h2>Selamat Datang 👋</h2>
+
         <p>
             Kelola persediaan barang sekolah dengan mudah,
             cepat, dan teratur.
         </p>
+
     </div>
 
     <div class="stats">
@@ -562,6 +572,10 @@ td{
 </section>
 
 
+<!-- =========================
+     DATA BARANG
+========================= -->
+
 <section id="barang" class="page">
 
     <div class="panel">
@@ -598,6 +612,10 @@ td{
 </section>
 
 
+<!-- =========================
+     BARANG MASUK
+========================= -->
+
 <section id="masuk" class="page">
 
     <div class="panel">
@@ -629,6 +647,10 @@ td{
 </section>
 
 
+<!-- =========================
+     BARANG KELUAR
+========================= -->
+
 <section id="keluar" class="page">
 
     <div class="panel">
@@ -659,6 +681,10 @@ td{
 </section>
 
 
+<!-- =========================
+     PENCARIAN
+========================= -->
+
 <section id="pencarian" class="page">
 
     <div class="panel">
@@ -686,6 +712,10 @@ td{
 
 </section>
 
+
+<!-- =========================
+     LAPORAN
+========================= -->
 
 <section id="laporan" class="page">
 
@@ -719,6 +749,10 @@ td{
 </div>
 </main>
 
+
+<!-- =========================
+     MODAL BARANG
+========================= -->
 
 <div class="modal" id="barangModal">
 
@@ -835,6 +869,10 @@ td{
 </div>
 
 
+<!-- =========================
+     MODAL BARANG MASUK
+========================= -->
+
 <div class="modal" id="masukModal">
 
     <div class="modal-box">
@@ -869,6 +907,7 @@ td{
 
         <div class="form-group">
             <label>Jumlah</label>
+
             <input type="number"
                 id="jumlahMasuk"
                 min="1"
@@ -877,6 +916,7 @@ td{
 
         <div class="form-group">
             <label>Sumber / Keterangan</label>
+
             <input id="sumberMasuk"
                 placeholder="Contoh: Pembelian">
         </div>
@@ -895,6 +935,10 @@ td{
 
 </div>
 
+
+<!-- =========================
+     MODAL BARANG KELUAR
+========================= -->
 
 <div class="modal" id="keluarModal">
 
@@ -917,7 +961,9 @@ td{
 
         <div class="form-group">
             <label>Tanggal</label>
-            <input type="date" id="tanggalKeluar">
+
+            <input type="date"
+                id="tanggalKeluar">
         </div>
 
         <div class="form-group">
@@ -930,6 +976,7 @@ td{
 
         <div class="form-group">
             <label>Jumlah</label>
+
             <input type="number"
                 id="jumlahKeluar"
                 min="1"
@@ -938,6 +985,7 @@ td{
 
         <div class="form-group">
             <label>Penerima / Tujuan</label>
+
             <input id="tujuanKeluar"
                 placeholder="Contoh: Ruang Kelas 6A">
         </div>
@@ -964,6 +1012,10 @@ td{
 
 <script>
 
+/* =========================
+   DATA
+========================= */
+
 let barang = JSON.parse(
     localStorage.getItem("gudangBarang")
 ) || [];
@@ -977,6 +1029,10 @@ let transaksiKeluar = JSON.parse(
 ) || [];
 
 
+/* =========================
+   TANGGAL
+========================= */
+
 document.getElementById("tanggal").textContent =
     new Date().toLocaleDateString(
         "id-ID",
@@ -989,6 +1045,10 @@ document.getElementById("tanggal").textContent =
     );
 
 
+/* =========================
+   NAVIGASI
+========================= */
+
 function showPage(page,button){
 
     document.querySelectorAll(".page")
@@ -996,9 +1056,11 @@ function showPage(page,button){
             p.classList.remove("active");
         });
 
-    const target = document.getElementById(page);
+    const target =
+        document.getElementById(page);
 
     if(!target){
+        console.error("Halaman tidak ditemukan:",page);
         return;
     }
 
@@ -1023,30 +1085,39 @@ function showPage(page,button){
     };
 
     document.getElementById("pageTitle")
-        .textContent = titles[page] || "Dashboard";
+        .textContent = titles[page] || "Gudang Sekolah";
 
     renderAll();
-
 }
 
 
 function showPageByName(page){
 
-    const button =
-        document.querySelector(
-            ".menu button[onclick*=\"'" + page + "'\"]"
-        );
+    const buttons =
+        document.querySelectorAll(".menu button");
 
-    if(button){
-        showPage(page,button);
-    }
+    buttons.forEach(function(button){
+
+        const onclick =
+            button.getAttribute("onclick") || "";
+
+        if(onclick.includes("'" + page + "'")){
+            showPage(page,button);
+        }
+
+    });
 
 }
 
 
+/* =========================
+   MODAL
+========================= */
+
 function openModal(id){
 
-    const modal = document.getElementById(id);
+    const modal =
+        document.getElementById(id);
 
     if(modal){
         modal.classList.add("show");
@@ -1057,7 +1128,8 @@ function openModal(id){
 
 function closeModal(id){
 
-    const modal = document.getElementById(id);
+    const modal =
+        document.getElementById(id);
 
     if(modal){
         modal.classList.remove("show");
@@ -1078,9 +1150,12 @@ function openBarangModal(){
     document.getElementById("keteranganBarang").value="";
 
     openModal("barangModal");
-
 }
 
+
+/* =========================
+   SIMPAN BARANG
+========================= */
 
 function simpanBarang(){
 
@@ -1115,42 +1190,45 @@ function simpanBarang(){
         .value.trim();
 
 
-    if(
-        !kode ||
-        !nama ||
-        !kategori ||
-        !satuan ||
-        !lokasi
-    ){
+    if(!kode || !nama || !kategori || !satuan || !lokasi){
 
         alert("Mohon lengkapi data barang.");
-
         return;
+
     }
 
 
-    if(
-        barang.some(function(item){
-            return item.kode.toLowerCase() === kode.toLowerCase();
-        })
-    ){
+    if(barang.some(function(item){
+
+        return item.kode.toLowerCase()
+            === kode.toLowerCase();
+
+    })){
 
         alert("Kode barang sudah digunakan.");
-
         return;
+
     }
 
 
     barang.push({
 
         id:Date.now(),
+
         kode:kode,
+
         nama:nama,
+
         kategori:kategori,
+
         satuan:satuan,
+
         stok:stok,
+
         minimum:minimum,
+
         lokasi:lokasi,
+
         keterangan:keterangan
 
     });
@@ -1167,6 +1245,10 @@ function simpanBarang(){
 }
 
 
+/* =========================
+   HAPUS BARANG
+========================= */
+
 function hapusBarang(id){
 
     const item =
@@ -1179,13 +1261,7 @@ function hapusBarang(id){
     }
 
 
-    if(
-        !confirm(
-            "Hapus barang " +
-            item.nama +
-            "?"
-        )
-    ){
+    if(!confirm("Hapus barang " + item.nama + "?")){
         return;
     }
 
@@ -1204,6 +1280,10 @@ function hapusBarang(id){
 
 }
 
+
+/* =========================
+   BARANG MASUK
+========================= */
 
 function openMasukModal(){
 
@@ -1242,14 +1322,15 @@ function simpanMasuk(){
         Number(document.getElementById("jumlahMasuk").value);
 
     const sumber =
-        document.getElementById("sumberMasuk").value.trim();
+        document.getElementById("sumberMasuk")
+        .value.trim();
 
 
     if(!tanggal || !id || jumlah <= 0){
 
         alert("Mohon lengkapi data barang masuk.");
-
         return;
+
     }
 
 
@@ -1262,8 +1343,8 @@ function simpanMasuk(){
     if(!item){
 
         alert("Barang tidak ditemukan.");
-
         return;
+
     }
 
 
@@ -1273,11 +1354,17 @@ function simpanMasuk(){
     transaksiMasuk.push({
 
         id:Date.now(),
+
         tanggal:tanggal,
+
         barangId:id,
+
         kode:item.kode,
+
         nama:item.nama,
+
         jumlah:jumlah,
+
         sumber:sumber
 
     });
@@ -1293,6 +1380,10 @@ function simpanMasuk(){
 
 }
 
+
+/* =========================
+   BARANG KELUAR
+========================= */
 
 function openKeluarModal(){
 
@@ -1331,14 +1422,15 @@ function simpanKeluar(){
         Number(document.getElementById("jumlahKeluar").value);
 
     const tujuan =
-        document.getElementById("tujuanKeluar").value.trim();
+        document.getElementById("tujuanKeluar")
+        .value.trim();
 
 
     if(!tanggal || !id || jumlah <= 0){
 
         alert("Mohon lengkapi data barang keluar.");
-
         return;
+
     }
 
 
@@ -1351,8 +1443,8 @@ function simpanKeluar(){
     if(!item){
 
         alert("Barang tidak ditemukan.");
-
         return;
+
     }
 
 
@@ -1374,11 +1466,17 @@ function simpanKeluar(){
     transaksiKeluar.push({
 
         id:Date.now(),
+
         tanggal:tanggal,
+
         barangId:id,
+
         kode:item.kode,
+
         nama:item.nama,
+
         jumlah:jumlah,
+
         tujuan:tujuan
 
     });
@@ -1395,10 +1493,18 @@ function simpanKeluar(){
 }
 
 
+/* =========================
+   PILIH BARANG
+========================= */
+
 function isiPilihanBarang(selectId){
 
     const select =
         document.getElementById(selectId);
+
+    if(!select){
+        return;
+    }
 
     select.innerHTML =
         '<option value="">Pilih barang</option>';
@@ -1426,20 +1532,25 @@ function isiPilihanBarang(selectId){
 }
 
 
+/* =========================
+   RENDER DATA BARANG
+========================= */
+
 function renderBarang(){
 
     const container =
         document.getElementById("tabelBarang");
 
-    const searchInput =
-        document.getElementById("searchBarang");
-
-    if(!container || !searchInput){
+    if(!container){
         return;
     }
 
+
     const search =
-        (searchInput.value || "").toLowerCase();
+        (
+            document.getElementById("searchBarang")
+            .value || ""
+        ).toLowerCase();
 
 
     const data =
@@ -1521,6 +1632,10 @@ function renderBarang(){
 }
 
 
+/* =========================
+   STATUS STOK
+========================= */
+
 function statusStok(item){
 
     if(item.stok <= 0){
@@ -1540,24 +1655,37 @@ function statusStok(item){
 }
 
 
+/* =========================
+   RENDER DASHBOARD
+========================= */
+
 function renderDashboard(){
 
     const totalJenis =
         barang.length;
 
+
     const totalStok =
         barang.reduce(function(total,item){
+
             return total + Number(item.stok);
+
         },0);
+
 
     const totalMasuk =
         transaksiMasuk.reduce(function(total,item){
+
             return total + Number(item.jumlah);
+
         },0);
+
 
     const menipis =
         barang.filter(function(item){
+
             return item.stok <= item.minimum;
+
         }).length;
 
 
@@ -1631,6 +1759,10 @@ function renderDashboard(){
 }
 
 
+/* =========================
+   TABEL MASUK
+========================= */
+
 function renderMasuk(){
 
     const container =
@@ -1696,6 +1828,10 @@ function renderMasuk(){
 
 }
 
+
+/* =========================
+   TABEL KELUAR
+========================= */
 
 function renderKeluar(){
 
@@ -1763,6 +1899,10 @@ function renderKeluar(){
 }
 
 
+/* =========================
+   PENCARIAN
+========================= */
+
 function renderPencarian(){
 
     const container =
@@ -1774,6 +1914,7 @@ function renderPencarian(){
     if(!container || !input){
         return;
     }
+
 
     const search =
         (input.value || "").toLowerCase().trim();
@@ -1857,6 +1998,10 @@ function renderPencarian(){
 }
 
 
+/* =========================
+   LAPORAN
+========================= */
+
 function renderLaporan(){
 
     const container =
@@ -1927,6 +2072,10 @@ function renderLaporan(){
 }
 
 
+/* =========================
+   SIMPAN DATA
+========================= */
+
 function saveData(){
 
     localStorage.setItem(
@@ -1947,6 +2096,10 @@ function saveData(){
 }
 
 
+/* =========================
+   RENDER SEMUA
+========================= */
+
 function renderAll(){
 
     renderDashboard();
@@ -1958,6 +2111,10 @@ function renderAll(){
 
 }
 
+
+/* =========================
+   TOAST
+========================= */
 
 function toast(message){
 
@@ -1976,6 +2133,10 @@ function toast(message){
 
 }
 
+
+/* =========================
+   FORMAT TANGGAL
+========================= */
 
 function formatTanggal(tanggal){
 
@@ -1997,6 +2158,10 @@ function formatTanggal(tanggal){
 }
 
 
+/* =========================
+   KEAMANAN TEKS
+========================= */
+
 function escapeHtml(text){
 
     return String(text)
@@ -2009,9 +2174,14 @@ function escapeHtml(text){
 }
 
 
+/* =========================
+   MULAI APLIKASI
+========================= */
+
 renderAll();
 
 </script>
 
 </body>
 </html>
+```
