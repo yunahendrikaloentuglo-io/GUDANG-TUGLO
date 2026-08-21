@@ -838,6 +838,18 @@ td{
         <br>
 
         <button class="btn btn-success"
+           function openModal(id){
+
+    document.getElementById(id)
+        .classList.add("show");
+
+}
+           function closeModal(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+
+}
             onclick="simpanBarang()">
             💾 Simpan Barang
         </button>
