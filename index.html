@@ -170,7 +170,6 @@ button,input,select{
     color:#64748b;
     margin-top:5px;
 }
-
 .panel{
     background:white;
     border-radius:12px;
@@ -1226,7 +1225,32 @@ function simpanBarang(){
    HAPUS BARANG
 ========================= */
 
-function hapusBarang(id){
+function editBarang(id){
+
+    const item = barang.find(function(b){
+        return b.id === id;
+    });
+
+    if(!item){
+        alert("Data barang tidak ditemukan.");
+        return;
+    }
+
+    document.getElementById("kodeBarang").value = item.kode;
+    document.getElementById("namaBarang").value = item.nama;
+    document.getElementById("kategoriBarang").value = item.kategori;
+    document.getElementById("satuanBarang").value = item.satuan;
+    document.getElementById("stokBarang").value = item.stok;
+    document.getElementById("minimumBarang").value = item.minimum;
+    document.getElementById("lokasiBarang").value = item.lokasi;
+    document.getElementById("keteranganBarang").value = item.keterangan || "";
+
+    window.editingBarangId = id;
+
+    openModal("barangModal");
+
+}
+    function hapusBarang(id){
 
     const item =
         barang.find(function(b){
