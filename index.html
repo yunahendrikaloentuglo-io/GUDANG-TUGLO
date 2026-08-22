@@ -571,11 +571,19 @@ td{
 
 </section>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script> 
 <!-- =========================
      DATA BARANG
 ========================= -->
+const SUPABASE_URL = "https://qrbrgmqolmnoxqtrujxr.supabase.co";
 
+const SUPABASE_KEY = "PASTE_PUBLISHABLE_KEY_DI_SINI";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 <section id="barang" class="page">
 
     <div class="panel">
