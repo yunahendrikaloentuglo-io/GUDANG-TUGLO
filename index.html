@@ -1222,6 +1222,9 @@ function simpanBarang(){
     barang.push({
 
         id:Date.now(),
+        const { data, error } = await supabaseClient
+    .from("data barang")
+    .insert([{
 
         kode:kode,
 
