@@ -2198,7 +2198,36 @@ function escapeHtml(text){
    MULAI APLIKASI
 ========================= */
 
-renderAll();
+async function mulaiAplikasi(){
+
+    const { data, error } = await supabaseClient
+        .from("Data Barang")
+        .select("*");
+
+    if(error){
+        console.error("Gagal mengambil data:", error);
+        renderAll();
+        return;
+    }
+
+    barang = data.map(function(item){
+        return {
+            id: item.id,
+            kode: item.kode,
+            nama: item.nama,
+            kategori: "",
+            satuan: item.satuan,
+            stok: Number(item.stok || 0),
+            minimum: Number(item.minimum || 0),
+            lokasi: item.lokasi || "",
+            keterangan: item.keterangan || ""
+        };
+    });
+
+    renderAll();
+}
+
+mulaiAplikasi();
 
 </script>
 </body>
