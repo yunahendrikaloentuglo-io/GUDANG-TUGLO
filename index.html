@@ -2200,33 +2200,47 @@ function escapeHtml(text){
 
 async function mulaiAplikasi(){
 
-    const { data, error } = await supabaseClient
-        .from("Data Barang")
-        .select("*");
+    try {
 
-    if(error){
-        console.error("Gagal mengambil data:", error);
+        const { data, error } = await supabaseClient
+            .from("Data Barang")
+            .select("*");
+
+        if(error){
+            console.error("Supabase gagal:", error);
+            renderAll();
+            return;
+        }
+
+        if(data && data.length > 0){
+
+            barang = data.map(function(item){
+                return {
+                    id: item.id,
+                    kode: item.kode || "",
+                    nama: item.nama || "",
+                    kategori: item.kategori || "",
+                    satuan: item.satuan || "",
+                    stok: Number(item.stok || 0),
+                    minimum: Number(item.minimum || 0),
+                    lokasi: item.lokasi || "",
+                    keterangan: item.keterangan || ""
+                };
+            });
+
+        }
+
         renderAll();
-        return;
+
+    } catch(error){
+
+        console.error("Gagal memuat data:", error);
+
+        renderAll();
+
     }
 
-    barang = data.map(function(item){
-    return {
-        id: item.id,
-        kode: item.kode,
-        nama: item.nama,
-        kategori: "",
-        satuan: item.satuan,
-        stok: Number(item.stok || 0),
-        minimum: Number(item.minimum || 0),
-        lokasi: item.lokasi || "",
-        keterangan: item.keterangan || ""
-    };
-});
-
-    renderAll();
 }
-
 mulaiAplikasi();
 
 </script>
