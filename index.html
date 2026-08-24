@@ -1209,29 +1209,25 @@ function simpanBarang(){
 
     barang.push({
 
-        id:Date.now(),
-        const { data, error } = await supabaseClient
-    .from("data barang")
-    .insert([{
+    id:Date.now(),
 
-        kode:kode,
+    kode:kode,
 
-        nama:nama,
+    nama:nama,
 
-        kategori:kategori,
+    kategori:kategori,
 
-        satuan:satuan,
+    satuan:satuan,
 
-        stok:stok,
+    stok:stok,
 
-        minimum:minimum,
+    minimum:minimum,
 
-        lokasi:lokasi,
+    lokasi:lokasi,
 
-        keterangan:keterangan
+    keterangan:keterangan
 
-    });
-
+});
 
     saveData();
 
