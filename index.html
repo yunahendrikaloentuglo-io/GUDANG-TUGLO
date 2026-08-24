@@ -1153,7 +1153,7 @@ function openBarangModal(){
    SIMPAN BARANG
 ========================= */
 
-function simpanBarang(){
+async function simpanBarang(){
 
     const kode =
         document.getElementById("kodeBarang")
@@ -1206,7 +1206,24 @@ function simpanBarang(){
 
     }
 
+const { data, error } = await supabaseClient
+    .from("Data Barang")
+    .insert([{
+        kode: kode,
+        nama: nama,
+        jumlah: stok,
+        satuan: satuan,
+        lokasi: lokasi,
+        keterangan: keterangan,
+        stok: stok,
+        minimum: minimum
+    }]);
 
+if(error){
+    console.error(error);
+    alert("Data gagal disimpan ke database: " + error.message);
+    return;
+}
     barang.push({
 
     id:Date.now(),
@@ -2176,6 +2193,16 @@ function escapeHtml(text){
 renderAll();
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://qrbrgmqolmnoxqtrujxr.supabase.co";
+const SUPABASE_KEY = sb_publishable_MKvIbJGyV-7qTp_NGM0Gdg_17lwlplT
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+</script>
 </body>
 </html>
