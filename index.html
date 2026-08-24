@@ -2211,18 +2211,18 @@ async function mulaiAplikasi(){
     }
 
     barang = data.map(function(item){
-        return {
-            id: item.id,
-            kode: item.kode,
-            nama: item.nama,
-            kategori: "",
-            satuan: item.satuan,
-            stok: Number(item.stok || 0),
-            minimum: Number(item.minimum || 0),
-            lokasi: item.lokasi || "",
-            keterangan: item.keterangan || ""
-        };
-    });
+    return {
+        id: item.id,
+        kode: item.kode,
+        nama: item.nama,
+        kategori: "",
+        satuan: item.satuan,
+        stok: Number(item.stok || 0),
+        minimum: Number(item.minimum || 0),
+        lokasi: item.lokasi || "",
+        keterangan: item.keterangan || ""
+    };
+});
 
     renderAll();
 }
