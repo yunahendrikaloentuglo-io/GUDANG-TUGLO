@@ -2293,7 +2293,44 @@ async function mulaiAplikasi(){
             });
 
         }
+        const { data: dataMasuk, error: errorMasuk } =
+            await supabaseClient
+            .from("Barang Masuk")
+            .select("*")
+            .order("tanggal", { ascending: false });
 
+        if(errorMasuk){
+
+            console.error(
+                "Gagal mengambil Barang Masuk:",
+                errorMasuk
+            );
+
+        } else {
+
+            transaksiMasuk = (dataMasuk || []).map(function(item){
+
+                return {
+
+                    id: item.id,
+
+                    tanggal: item.tanggal,
+
+                    barangId: item.barang_id,
+
+                    kode: item.kode || "",
+
+                    nama: item.nama || "",
+
+                    jumlah: Number(item.jumlah || 0),
+
+                    sumber: item.sumber || ""
+
+                };
+
+            });
+
+        }
         renderAll();
 renderBarang();
     } catch(error){
