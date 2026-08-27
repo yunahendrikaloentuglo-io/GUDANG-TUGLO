@@ -1,4 +1,4 @@
-```html
+```html 
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -1333,7 +1333,7 @@ function openMasukModal(){
 }
 
 
-function simpanMasuk(){
+async function simpanMasuk(){
 
     const tanggal =
         document.getElementById("tanggalMasuk").value;
@@ -1371,24 +1371,87 @@ function simpanMasuk(){
     }
 
 
-    item.stok += jumlah;
+    /* SIMPAN TRANSAKSI KE SUPABASE */
+
+    const { data, error } = await supabaseClient
+        .from("Barang Masuk")
+        .insert([{
+            tanggal: tanggal,
+            barang_id: id,
+            kode: item.kode,
+            nama: item.nama,
+            jumlah: jumlah,
+            sumber: sumber
+        }])
+        .select();
+
+
+    if(error){
+
+        console.error("Gagal simpan Barang Masuk:", error);
+
+        alert(
+            "Barang masuk gagal disimpan ke Supabase:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    /* UPDATE STOK DI SUPABASE */
+
+    const stokBaru =
+        Number(item.stok) + jumlah;
+
+
+    const { error: errorStok } =
+        await supabaseClient
+        .from("Data Barang")
+        .update({
+            stok: stokBaru,
+            jumlah: stokBaru
+        })
+        .eq("id", id);
+
+
+    if(errorStok){
+
+        console.error("Gagal update stok:", errorStok);
+
+        alert(
+            "Transaksi tersimpan, tetapi stok gagal diperbarui:\n" +
+            errorStok.message
+        );
+
+        return;
+
+    }
+
+
+    /* UPDATE DATA DI APLIKASI */
+
+    item.stok = stokBaru;
 
 
     transaksiMasuk.push({
 
-        id:Date.now(),
+        id: data && data[0]
+            ? data[0].id
+            : Date.now(),
 
-        tanggal:tanggal,
+        tanggal: tanggal,
 
-        barangId:id,
+        barangId: id,
 
-        kode:item.kode,
+        kode: item.kode,
 
-        nama:item.nama,
+        nama: item.nama,
 
-        jumlah:jumlah,
+        jumlah: jumlah,
 
-        sumber:sumber
+        sumber: sumber
 
     });
 
@@ -1397,13 +1460,11 @@ function simpanMasuk(){
 
     closeModal("masukModal");
 
-    toast("Barang masuk berhasil dicatat.");
+    toast("Barang masuk berhasil disimpan.");
 
     renderAll();
 
 }
-
-
 /* =========================
    BARANG KELUAR
 ========================= */
