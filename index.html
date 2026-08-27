@@ -1494,7 +1494,7 @@ function openKeluarModal(){
 }
 
 
-function simpanKeluar(){
+async function simpanKeluar(){
 
     const tanggal =
         document.getElementById("tanggalKeluar").value;
@@ -1544,24 +1544,93 @@ function simpanKeluar(){
     }
 
 
-    item.stok -= jumlah;
+    /* SIMPAN TRANSAKSI KE SUPABASE */
+
+    const { data, error } = await supabaseClient
+        .from("Barang Keluar")
+        .insert([{
+            tanggal: tanggal,
+            barang_id: id,
+            kode: item.kode,
+            nama: item.nama,
+            jumlah: jumlah,
+            tujuan: tujuan
+        }])
+        .select();
+
+
+    if(error){
+
+        console.error(
+            "Gagal simpan Barang Keluar:",
+            error
+        );
+
+        alert(
+            "Barang keluar gagal disimpan ke Supabase:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    /* UPDATE STOK DI SUPABASE */
+
+    const stokBaru =
+        Number(item.stok) - jumlah;
+
+
+    const { error: errorStok } =
+        await supabaseClient
+        .from("Data Barang")
+        .update({
+            stok: stokBaru,
+            jumlah: stokBaru
+        })
+        .eq("id", id);
+
+
+    if(errorStok){
+
+        console.error(
+            "Gagal update stok:",
+            errorStok
+        );
+
+        alert(
+            "Transaksi tersimpan, tetapi stok gagal diperbarui:\n" +
+            errorStok.message
+        );
+
+        return;
+
+    }
+
+
+    /* UPDATE DATA DI APLIKASI */
+
+    item.stok = stokBaru;
 
 
     transaksiKeluar.push({
 
-        id:Date.now(),
+        id: data && data[0]
+            ? data[0].id
+            : Date.now(),
 
-        tanggal:tanggal,
+        tanggal: tanggal,
 
-        barangId:id,
+        barangId: id,
 
-        kode:item.kode,
+        kode: item.kode,
 
-        nama:item.nama,
+        nama: item.nama,
 
-        jumlah:jumlah,
+        jumlah: jumlah,
 
-        tujuan:tujuan
+        tujuan: tujuan
 
     });
 
@@ -1570,7 +1639,7 @@ function simpanKeluar(){
 
     closeModal("keluarModal");
 
-    toast("Barang keluar berhasil dicatat.");
+    toast("Barang keluar berhasil disimpan.");
 
     renderAll();
 
