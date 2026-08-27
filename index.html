@@ -1219,13 +1219,16 @@ const { data, error } = await supabaseClient
     .insert([{
         kode: kode,
         nama: nama,
+        kategori: kategori,
         jumlah: stok,
         satuan: satuan,
         lokasi: lokasi,
         keterangan: keterangan,
         stok: stok,
         minimum: minimum
-    }]);
+    }])
+    .select()
+    .single();
 
 if(error){
     console.error(error);
